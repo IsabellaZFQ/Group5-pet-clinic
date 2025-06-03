@@ -40,19 +40,19 @@ class OwnerController {
 			.orElseThrow(() -> new IllegalArgumentException("Owner not found with id: " + ownerId));
 	}
 
-	// 🔁 将 Find Owners 页面跳转到 /owners 列表页
+	// go to the owners page
 	@GetMapping("/owners/find")
 	public String redirectToOwnersList() {
 		return "redirect:/owners";
 	}
 
-	// 🆕 添加主人（显示表单）
+	// add owner
 	@GetMapping("/owners/new")
 	public String initCreationForm() {
 		return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
 	}
 
-	// 🆗 添加主人（提交表单）
+	//  submit new owner
 	@PostMapping("/owners/new")
 	public String processCreationForm(@Valid Owner owner, BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
@@ -64,7 +64,7 @@ class OwnerController {
 		return "redirect:/owners/" + owner.getId();
 	}
 
-	// 🔍 查找主人：默认显示全部，可模糊搜索
+	// search owner
 	@GetMapping("/owners")
 	public String processFindForm(
 		@RequestParam(value = "lastName", required = false) String lastName,
@@ -87,13 +87,13 @@ class OwnerController {
 	}
 
 
-	// ✏️ 编辑主人（显示表单）
+	// Edit owner
 	@GetMapping("/owners/{ownerId}/edit")
 	public String initUpdateOwnerForm() {
 		return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
 	}
 
-	// ✅ 编辑主人（提交表单）
+	// submit edit owner
 	@PostMapping("/owners/{ownerId}/edit")
 	public String processUpdateOwnerForm(@Valid Owner owner, BindingResult result, @PathVariable("ownerId") int ownerId,
 										 RedirectAttributes redirectAttributes) {
@@ -114,7 +114,7 @@ class OwnerController {
 		return "redirect:/owners/{ownerId}";
 	}
 
-	// 👁️ 查看主人详情
+	// view owner
 	@GetMapping("/owners/{ownerId}")
 	public ModelAndView showOwner(@PathVariable("ownerId") int ownerId) {
 		ModelAndView mav = new ModelAndView("owners/ownerDetails");
@@ -125,7 +125,7 @@ class OwnerController {
 		return mav;
 	}
 
-	// 📄（保留）分页功能（你可以以后用）
+	// 分页功能
 	private Page<Owner> findPaginatedForOwnersLastName(int page, String lastname) {
 		int pageSize = 5;
 		Pageable pageable = PageRequest.of(page - 1, pageSize);
@@ -141,6 +141,7 @@ class OwnerController {
 		return "owners/ownersList";
 	}
 
+	//delete owner
 	@GetMapping("/owners/{ownerId}/delete")
 	public String deleteOwner(@PathVariable("ownerId") int ownerId) {
 		owners.deleteById(ownerId);
