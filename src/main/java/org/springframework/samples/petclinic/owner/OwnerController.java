@@ -81,7 +81,7 @@ class OwnerController {
 		model.addAttribute("selections", ownersPage.getContent());
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", ownersPage.getTotalPages());
-		model.addAttribute("lastName", lastName); // 👈 传回去保留搜索
+		model.addAttribute("lastName", lastName); 
 
 		return "owners/findOwners";
 	}
