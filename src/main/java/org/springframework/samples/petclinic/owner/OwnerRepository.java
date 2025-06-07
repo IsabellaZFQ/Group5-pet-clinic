@@ -71,6 +71,4 @@ public interface OwnerRepository extends JpaRepository<Owner, Integer> {
 
 	Page<Owner> findByLastNameContainingIgnoreCase(String lastName, Pageable pageable);
 
-
-
 }

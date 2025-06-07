@@ -35,8 +35,7 @@ class OwnerController {
 
 	@ModelAttribute("owner")
 	public Owner findOwner(@PathVariable(name = "ownerId", required = false) Integer ownerId) {
-		return ownerId == null ? new Owner()
-			: this.owners.findById(ownerId)
+		return ownerId == null ? new Owner() : this.owners.findById(ownerId)
 			.orElseThrow(() -> new IllegalArgumentException("Owner not found with id: " + ownerId));
 	}
 
@@ -52,7 +51,7 @@ class OwnerController {
 		return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
 	}
 
-	//  submit new owner
+	// submit new owner
 	@PostMapping("/owners/new")
 	public String processCreationForm(@Valid Owner owner, BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
@@ -66,10 +65,8 @@ class OwnerController {
 
 	// search owner
 	@GetMapping("/owners")
-	public String processFindForm(
-		@RequestParam(value = "lastName", required = false) String lastName,
-		@RequestParam(value = "page", defaultValue = "0") int page,
-		Model model) {
+	public String processFindForm(@RequestParam(value = "lastName", required = false) String lastName,
+			@RequestParam(value = "page", defaultValue = "0") int page, Model model) {
 
 		if (lastName == null || lastName.isBlank()) {
 			lastName = "";
@@ -81,11 +78,10 @@ class OwnerController {
 		model.addAttribute("selections", ownersPage.getContent());
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", ownersPage.getTotalPages());
-		model.addAttribute("lastName", lastName); 
+		model.addAttribute("lastName", lastName);
 
 		return "owners/findOwners";
 	}
-
 
 	// Edit owner
 	@GetMapping("/owners/{ownerId}/edit")
@@ -96,7 +92,7 @@ class OwnerController {
 	// submit edit owner
 	@PostMapping("/owners/{ownerId}/edit")
 	public String processUpdateOwnerForm(@Valid Owner owner, BindingResult result, @PathVariable("ownerId") int ownerId,
-										 RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			redirectAttributes.addFlashAttribute("error", "There was an error in updating the owner.");
 			return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
@@ -119,8 +115,8 @@ class OwnerController {
 	public ModelAndView showOwner(@PathVariable("ownerId") int ownerId) {
 		ModelAndView mav = new ModelAndView("owners/ownerDetails");
 		Optional<Owner> optionalOwner = this.owners.findById(ownerId);
-		Owner owner = optionalOwner.orElseThrow(() -> new IllegalArgumentException(
-			"Owner not found with id: " + ownerId));
+		Owner owner = optionalOwner
+			.orElseThrow(() -> new IllegalArgumentException("Owner not found with id: " + ownerId));
 		mav.addObject(owner);
 		return mav;
 	}
@@ -141,13 +137,11 @@ class OwnerController {
 		return "owners/ownersList";
 	}
 
-	//delete owner
+	// delete owner
 	@GetMapping("/owners/{ownerId}/delete")
 	public String deleteOwner(@PathVariable("ownerId") int ownerId) {
 		owners.deleteById(ownerId);
 		return "redirect:/owners";
 	}
-
-
 
 }

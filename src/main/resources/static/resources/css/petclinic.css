@@ -3192,7 +3192,9 @@ textarea.form-control-lg {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: var(--bs-navbar-padding-y) var(--bs-navbar-padding-x); }
+  padding: var(--bs-navbar-padding-y) var(--bs-navbar-padding-x);
+  border-top: 4px solid #FBAF5E; /* logo的黄棕色 */
+  background: linear-gradient(to right, #7C4000, #FBAF5E); }
   .navbar > .container,
   .navbar > .container-fluid,
   .navbar > .container-sm,
@@ -9430,23 +9432,23 @@ strong {
   font-family: "montserratregular", sans-serif; }
 
 .navbar {
-  border-top: 4px solid #6db33f;
-  background-color: #34302d;
+  border-top: 4px solid #FBAF5E; /* logo的黄棕色 */
+  background: linear-gradient(to right, #7C4000, #FBAF5E);
   margin-bottom: 0px;
   border-bottom: 0;
   border-left: 0;
   border-right: 0; }
 
-.navbar a.navbar-brand {
+/* .navbar a.navbar-brand {
   background: url("../images/spring-logo-dataflow.png") -1px -1px no-repeat;
   margin: 12px 0 6px;
   width: 229px;
   height: 46px;
   display: inline-block;
   text-decoration: none;
-  padding: 0; }
+  padding: 0; } */
 
-.navbar a.navbar-brand span {
+/* .navbar a.navbar-brand span {
   display: block;
   width: 229px;
   height: 46px;
@@ -9454,7 +9456,7 @@ strong {
   opacity: 0;
   -moz-transition: opacity 0.12s ease-in-out;
   -webkit-transition: opacity 0.12s ease-in-out;
-  -o-transition: opacity 0.12s ease-in-out; }
+  -o-transition: opacity 0.12s ease-in-out; } */
 
 .navbar a.navbar-brand:hover span {
   opacity: 1; }
@@ -9480,17 +9482,15 @@ strong {
 
 .navbar li:hover > a {
   color: #eeeeee;
-  background-color: #6db33f; }
+  background-color: #d18f3a; }
 
 .navbar-toggle {
-  border-width: 0; }
-  .navbar-toggle .icon-bar + .icon-bar {
-    margin-top: 3px; }
-  .navbar-toggle .icon-bar {
+  border-width: 0; }  .navbar-toggle .icon-bar + .icon-bar {
+    margin-top: 3px; }  .navbar-toggle .icon-bar {
     width: 19px;
     height: 3px; }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .navbar-toggle {
     position: absolute;
     z-index: 9999;
@@ -9515,6 +9515,6 @@ strong {
     margin-bottom: 30px; }
   .index-page--subtitle {
     margin-top: 10px;
-    margin-bottom: 30px; } }
+    margin-bottom: 30px; } } */
 
 /*# sourceMappingURL=../../../../../../target/petclinic.css.map */
