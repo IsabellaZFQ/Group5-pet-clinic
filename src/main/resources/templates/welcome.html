@@ -2,15 +2,42 @@
 
 <html xmlns:th="https://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'home')}">
 
-  <body>
-
-    <h2 th:text="#{welcome}">Welcome</h2>
-    <div class="row">
-        <div class="col-md-12">
-          <img class="img-responsive" src="../static/resources/images/pets.png" th:src="@{/resources/images/pets.png}"/>
-        </div>
-    </div>
-
+  <body th:style="'background-image: url(' + @{/resources/images/HomePage.jpg} + '); background-size: cover; background-position: center; background-repeat: no-repeat; min-height: 100vh;'">
+      <h2 style="font-size: 3.5rem; color: #333333; text-align: center; margin-top: 2rem;">Welcome, admin!</h2>
+      <h3 style="font-size: 2.5rem; margin: 2rem 0;">Manage your Pet Clinic Efficiently</h3>
+      <div style="width: 40%; text-align: left;">
+        <h4><img th:src="@{/resources/images/paw.svg}" alt="Paw Icon" style="width: 20px; height: 20px; margin-right: 10px;">
+          Every life we care for here brings warmth not just to a home, but to the world. Healing paws, happy hearts - this is where their journey to wellness begins..</h4>
+      </div>
+      <div style="display: flex; gap: 32px; margin-top: 40px; margin-left: 0;">
+        <a href="/info/vaccine.html" class="info-card" target="_blank">How important to have vaccine</a>
+        <a href="/info/care.html" class="info-card" target="_blank">How to have a<br>healthy, happy<br>pet</a>
+      </div>
+      <style>
+        .info-card {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 300px;
+          height: 260px;
+          background: #f7eadc;
+          border: 3px solid #3d2104;
+          border-radius: 0px;
+          font-size: 1.5rem;
+          color: #222;
+          text-decoration: none;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+          transition: box-shadow 0.3s, transform 0.2s;
+          text-align: center;
+          font-family: inherit;
+        }
+        .info-card:hover {
+          box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+          transform: translateY(-4px) scale(1.03);
+          cursor: pointer;
+        }
+      </style>
+   
   </body>
 
 </html>
