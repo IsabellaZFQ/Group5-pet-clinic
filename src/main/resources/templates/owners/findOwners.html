@@ -1,70 +1,66 @@
 <html xmlns:th="https://www.thymeleaf.org"
       th:replace="~{fragments/layout :: layout(~{::body}, 'owners')}">
-<body>
-
-<h2 th:text="#{findOwners}">Find Owners</h2>
-
-<!-- 添加主人按钮 -->
-<a class="btn btn-primary mb-3" th:href="@{/owners/new}">Add Owner</a>
-
-<!-- 搜索框 -->
-<form th:action="@{/owners}" method="get" class="form-inline mb-3">
-  <input type="text" name="lastName" placeholder="Search by last name"
-         class="form-control mr-2" style="display:inline-block; width:auto;" />
-  <button type="submit" class="btn btn-outline-dark">Search</button>
-</form>
-
-<!-- 主人列表表格 -->
-<table class="table table-striped">
-  <thead class="thead-dark">
-  <tr>
-    <th>Name</th>
-    <th>Address</th>
-    <th>City</th>
-    <th>Telephone</th>
-    <th>Pets</th>
-
-
-  </tr>
-  </thead>
-  <tbody>
-  <!-- 若无主人，显示提示 -->
-  <tr th:if="${#lists.isEmpty(selections)}">
-    <td colspan="5">No owners found.</td>
-  </tr>
-
-  <!-- 渲染主人 -->
-  <tr th:each="owner : ${selections}">
-    <td>
-      <a th:href="@{|/owners/${owner.id}|}"
-         th:text="${owner.firstName + ' ' + owner.lastName}"></a>
-    </td>
-    <td th:text="${owner.address}"></td>
-    <td th:text="${owner.city}"></td>
-    <td th:text="${owner.telephone}"></td>
-    <td>
-      <ul>
-        <li th:each="pet : ${owner.pets}" th:text="${pet.name}"></li>
-      </ul>
-    </td>
-
-
-  </tr>
-  </tbody>
-</table>
-<div>
-  <nav th:if="${totalPages > 1}">
-    <ul class="pagination">
-      <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
-          th:classappend="${i == currentPage} ? 'active'">
-        <a class="page-link"
-           th:href="@{|/owners?page=${i}&lastName=${lastName}|}"
-           th:text="${i + 1}">1</a>
-      </li>
-    </ul>
-  </nav>
-</div>
-
-
+<body style="overflow:hidden;">
+  <div class="container xd-container mt-5 mb-5">
+    <div class="owner-card" style="border:none; border-radius:18px; box-shadow:0 8px 32px rgba(124,64,0,0.10); background:#fff; padding:36px 28px 28px 28px; max-width:98%; margin:auto;">
+      <h2 th:text="#{findOwners}" style="color:#7C4000; font-weight:bold; margin-bottom:28px;">Find Owners</h2>
+      <!-- 添加主人按钮 -->
+      <a class="btn mb-3" th:href="@{/owners/new}" style="background:#7C4000; color:#fff; font-weight:500; border-radius:8px; border:none;">Add Owner</a>
+      <!-- 搜索框 -->
+      <form th:action="@{/owners}" method="get" class="form-inline mb-3" style="display:flex; gap:12px; align-items:center;">
+        <input type="text" name="lastName" placeholder="Search by last name"
+               class="form-control" style="border-radius:8px; border:1.5px solid #7C4000; width:220px;" />
+        <button type="submit" class="btn" style="background:#f7e7d3; color:#7C4000; font-weight:500; border-radius:8px; border:1.5px solid #7C4000;">Search</button>
+      </form>
+      <!-- 主人列表表格 -->
+      <table class="table table-striped" style="border-radius:12px; overflow:hidden; box-shadow:0 2px 12px rgba(124,64,0,0.07);">
+        <thead style="background:#3d2104 !important; color:#fff !important;">
+        <tr>
+          <th style="background:#3d2104 !important; color:#fff !important; font-weight:bold;">Name</th>
+          <th style="background:#3d2104 !important; color:#fff !important; font-weight:bold;">Address</th>
+          <th style="background:#3d2104 !important; color:#fff !important; font-weight:bold;">City</th>
+          <th style="background:#3d2104 !important; color:#fff !important; font-weight:bold;">Telephone</th>
+          <th style="background:#3d2104 !important; color:#fff !important; font-weight:bold;">Pets</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- 若无主人，显示提示 -->
+        <tr th:if="${#lists.isEmpty(selections)}">
+          <td colspan="5">No owners found.</td>
+        </tr>
+        <!-- 渲染主人 -->
+        <tr th:each="owner : ${selections}">
+          <td>
+            <a th:href="@{|/owners/${owner.id}|}"
+               th:text="${owner.firstName + ' ' + owner.lastName}"
+               style="color:#7C4000; font-weight:500; text-decoration:underline;"></a>
+          </td>
+          <td th:text="${owner.address}"></td>
+          <td th:text="${owner.city}"></td>
+          <td th:text="${owner.telephone}"></td>
+          <td>
+            <ul style="margin-bottom:0; padding-left:18px;">
+              <li th:each="pet : ${owner.pets}" th:text="${pet.name}"></li>
+            </ul>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div>
+        <nav th:if="${totalPages > 1}" style="margin-top:24px;">
+          <ul class="pagination" style="gap:4px;">
+            <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                th:classappend="${i == currentPage} ? 'active'" style="border-radius:6px;">
+              <a class="page-link"
+                 th:href="@{|/owners?page=${i}&lastName=${lastName}|}"
+                 th:text="${i + 1}"
+                 style="color:#7C4000; font-weight:500; border-radius:6px; border:1.5px solid #7C4000; background:#fff; margin:0 2px;"
+                 th:styleappend="${i == currentPage} ? 'background:#7C4000;color:#fff;' : ''">1</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
